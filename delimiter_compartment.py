@@ -1,8 +1,8 @@
 # delimiter compartment
 
 class DelimiterCompartment(object):
-    _src_compartment = None
-    _temp = None
+    '''compartment responsible for removing comments, 
+    newlines, tabs and spaces from the source code'''
     
     def __init__(self, src_compt):
         self._src_compartment = src_compt
@@ -29,6 +29,12 @@ class DelimiterCompartment(object):
         return False
     
     def skipBlank(self):
+        '''returns a character after removing all the newlines, tabs and comments
+        
+        also returns a space if it finds a newline, tab or space
+        '''
+        
+        # get a character from the source
         curr_char = self.nextChar()
         
         # check for comments
@@ -83,8 +89,8 @@ class DelimiterCompartment(object):
                 return curr_char
         
         # check for blanks, newlines, tabs
-        # skip newlines, blanks, tabs
         if(self.is_skippable(curr_char)):
+            # return a space instead
             return ' '
         
         return curr_char
