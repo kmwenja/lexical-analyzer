@@ -3,6 +3,8 @@
 # version: 2.0
 # author: Kennedy Mwenja, <mwenja07@gmail.com>
 # author: Mwathi Wakaba, <mwathy11@gmail.com>
+# author: James Macharia, <cjmasha@gmail.com>
+# author: Brian Busolo, <brianbusolo@gmail.com>
 
 import sys
 
@@ -70,9 +72,9 @@ def main():
         # initialize the analyzer
         la = LexicalAnalyzer(source_code, lookup_table)
         
-        # iterate through the tokens
+        # iterate through the tokens/lexemes
         next_token = la.next_token()
-        while next_token[0]:
+        while next_token:
             print repr(next_token)            
             next_token = la.next_token()
         

@@ -1,11 +1,8 @@
 # source compartment
 
 class SourceCompartment(object):
-    _data = None
-    _current_index = None
-    _len = None
-    _definitions = None
-    _in_directive = None
+    '''compartment responsible for pre-processing the source code
+    and giving other compartments single characters from the source code'''
     
     def __init__(self, data):
         self._data = data
@@ -24,15 +21,24 @@ class SourceCompartment(object):
         return self._current_index == self._len
     
     def nextCh(self):
+        '''preprocesses compiler directives and returns a character 
+        from the preprocessed source code'''
+        
+        # check if we've reached the end
         if self.is_end():
+            # return an empty string
             return ''
         
+        # get a character from the source code
         curr_char = self.current_char()
+        
+        # move the cursor to the next character
         self.increment();
         
         # check if the character is the beginning of a directive
         if curr_char == '#' and not self._in_directive:
             self._in_directive = True
+            
             # find out what directive it is
             directive = ''
             
@@ -104,30 +110,35 @@ class SourceCompartment(object):
                 if filename[0] != '<' or filename[-1] != '>':
                     raise Exception("Illegal include: %s" % filename)
                 
-                # open file and add to data stream
+                # open the included file
                 f = open(filename[1:-1])
                 new_data = f.read()
                 f.close()
                 
+                # add the file's source code to data stream at the cursor
                 self._data= self._data[:self._current_index] + new_data + self._data[self._current_index:]
                 self._len = self._len + len(new_data)
                 
+                # finish directive processing
                 self._in_directive = False
                                 
                 return self.nextCh()
             
             elif directive in self._definitions:
-                # add definition body to current position
+                # get the definition body
                 body = self._definitions[directive]
                 
+                # add the body to the data stream at the cursor
                 self._data= self._data[:self._current_index] + body + self._data[self._current_index:]
                 self._len = self._len + len(body)
                 
+                # finish directive processing
                 self._in_directive = False
                 
                 return self.nextCh()
                 
             else:
+                # there is no such directive
                 raise Exception("Illegal directive: %s" % directive)
                 
         
