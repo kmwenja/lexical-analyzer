@@ -1,3 +1,5 @@
 # Lexical Analyzer
 
-To be filled out later
+## Running examples
+
+`python lexical_analyzer.py examples/myprolog.pas examples/lookup_pascal.txt`
