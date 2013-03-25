@@ -1,0 +1,7 @@
+/* this function adds two numbers ****/
+add(a, b){
+	// add the 2 values together
+	c = a + b;
+	// return the value
+	return c;
+}
