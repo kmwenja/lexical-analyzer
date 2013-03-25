@@ -125,7 +125,7 @@ def main():
             else:
                 code = symbol_table[value]["code"]
             
-            print "Token Type:",token_type,"Code:",code,"Value:",value    
+            print "Token Type:",token_type,"\t\t","Code:",code,"\t","Value:",value    
             next_token = la.next_token()
         
         print "Done"
