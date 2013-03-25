@@ -4,7 +4,7 @@
 /* this is an example */
 program myprog;
 var area, pi, r: integer;
-#include <power.pas>
+#include <examples/power.pas>
 begin   /* main line */
 #ASSIGN1 ;
 end.
