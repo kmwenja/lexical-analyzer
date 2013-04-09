@@ -86,6 +86,8 @@ def main():
     lookup_file = sys.argv[2]
     reference_file = sys.argv[3]
     
+    verbose = True if len(sys.argv) >= 5 and sys.argv[4] == "verbose" else None
+    
     try:
         # get the source code
         f = open(source_code_file)
@@ -125,10 +127,15 @@ def main():
             else:
                 code = symbol_table[value]["code"]
             
-            print "Token Type:",token_type,"\t\t","Code:",code,"\t","Value:",value    
+            if verbose:
+                print "Token Type:",token_type,"\t\t","Code:",code,"\t","Value:",value    
+            else:
+                print token_type
+                
             next_token = la.next_token()
         
-        print "Done"
+        if verbose:
+            print "Done"
 
     except Exception, e:
         print repr(e)
