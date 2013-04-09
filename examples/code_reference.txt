@@ -20,6 +20,15 @@ plusTok 1019
 minusTok 1020
 divTok 1021
 periodTok 1022
+downToTok 1023
+procedureTok 1024
+booleanTok 1025
+charTok 1026
+stringTok 1027
+maxintTok 1028
+booleanLiteral *
+stringLiteral *
+charLiteral *
 integerLiteral *
 floatLiteral *
 idTok *
